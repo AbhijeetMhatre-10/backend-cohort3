@@ -24,7 +24,7 @@ app.put("/update/:id", (req, res)=>{
     res.send("User updated")
 })
 
-//patch
+//patch  
 app.patch("/update/:id/age", (req, res)=>{
     const {id} = req.params
     const body = req.body

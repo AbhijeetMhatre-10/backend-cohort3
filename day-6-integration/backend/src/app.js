@@ -4,6 +4,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const notesRoutes = require("./routes/notes.routes");
 const app = express();
+
 app.use(
   cors({
     origin: "http://localhost:5173",

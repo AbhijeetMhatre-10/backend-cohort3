@@ -22,7 +22,7 @@ const verifyAccessToken = ({ accessToken }) => {
 
 const verifyRefreshToken = ({ refreshToken }) => {
   const decode = jwt.verify(refreshToken, config.REFRESH_SECRET_KEY);
-  return decode
+  return decode;
 };
 
 export { generateTokens, verifyAccessToken, verifyRefreshToken };

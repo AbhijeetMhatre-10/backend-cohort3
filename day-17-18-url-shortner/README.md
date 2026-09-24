@@ -6,13 +6,14 @@ A full-stack URL shortener built with React, Vite, Express, and MongoDB. It acce
 
 ### Demo Video
 
-**[▶️ Watch the Demo Video](VIDEO_URL_HERE)**
+**[▶️ Watch the Demo Video](https://res.cloudinary.com/dsxvmhffb/video/upload/v1790267491/Screen_Recording_2026-09-24_at_9.23.26_PM_pneeab.mov)**
 
 <!-- Replace VIDEO_URL_HERE with the uploaded or hosted video URL. -->
 
 ### Screenshots
 
 <!-- Add project screenshots here. -->
+<img src="https://res.cloudinary.com/dsxvmhffb/image/upload/v1790268533/Screenshot_2026-09-24_at_10.18.23_PM_lxxoxl.png">
 
 ## ✨ Features
 

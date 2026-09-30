@@ -9,7 +9,7 @@ const register = async (req, res) => {
     const oldUser = await userModel.findOne({ email });
 
     if (oldUser) {
-      return res.status(200).json({
+      return res.status(400).json({
         message: "Email already exists.",
         error: [
           {
@@ -60,23 +60,55 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email });
 
-  if (!user) {
-    return res.status(400).json({
-      message: "Email is invalid.",
-      errors: [
-        {
-          msg: "Email is invalid.",
-          path: "No user found with this email.",
+    if (!user) {
+      return res.status(400).json({
+        message: "Invalid Email or Password",
+      });
+    }
+
+    const isPasswordMatched = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatched) {
+      return res.status(400).json({
+        message: "Invalid Email or Password",
+      });
+    }
+
+    const { refreshToken, accessToken } = generateTokens({
+      userId: user._id,
+      role: user.role,
+    });
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+    });
+
+    await userModel.findByIdAndUpdate(user._id, {
+      refreshToken,
+    });
+
+    res.status(200).json({
+      message: "User logged in successfully.",
+      data: {
+        user: {
+          id: user._id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
         },
-      ],
+      },
+      accessToken,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
     });
   }
-
-  
 };
 
-export { register };
+export { register, login };

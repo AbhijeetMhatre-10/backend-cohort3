@@ -31,10 +31,6 @@ const registerValidator = [
     .trim()
     .isLength({ min: 6, max: 20 })
     .withMessage("Password must be between 6 and 20 characters."),
-  body("role")
-    .optional()
-    .isIn(["seller", "user"])
-    .withMessage("Role must be either seller or user."),
   (req, res, next) => {
     const errors = validationResult(req);
 

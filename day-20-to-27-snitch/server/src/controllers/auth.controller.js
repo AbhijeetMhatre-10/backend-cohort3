@@ -110,7 +110,7 @@ const login = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: "Internal Server Error",
+      message: "Internal Server Error in login controller",
     });
   }
 };
@@ -155,7 +155,7 @@ const refresh = async (req, res) => {
     });
 
     await userModel.findByIdAndUpdate(user._id, {
-      newRefreshToken,
+      refreshToken: newRefreshToken,
     });
 
     res.status(200).json({
@@ -192,7 +192,7 @@ const me = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "User Authenticated SUccessfully.",
+      message: "User Authenticated Successfully.",
       data: {
         user: {
           name: user.name,

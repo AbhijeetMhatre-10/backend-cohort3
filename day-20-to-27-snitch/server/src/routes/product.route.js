@@ -1,6 +1,9 @@
 import express from "express";
 import { createProductValidator } from "../validators/product.validator.js";
-import { createProduct } from "../controllers/product.controller.js";
+import {
+  createProduct,
+  getAllProducts,
+} from "../controllers/product.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import upload from "../config/multer.js";
 import parseProductData from "../middlewares/product.middleware.js";
@@ -24,5 +27,7 @@ productRouter.post(
 
   createProduct,
 );
+
+productRouter.get("", authenticate, getAllProducts);
 
 export default productRouter;

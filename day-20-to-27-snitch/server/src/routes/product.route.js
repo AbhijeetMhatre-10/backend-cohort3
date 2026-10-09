@@ -1,8 +1,10 @@
 import express from "express";
-import { createProductValidator } from "../validators/product.validator.js";
+import { createProductValidator, listProductValidator, unlistProductValidator } from "../validators/product.validator.js";
 import {
   createProduct,
   getAllProducts,
+  listProduct,
+  unlistProduct,
 } from "../controllers/product.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import upload from "../config/multer.js";
@@ -29,5 +31,21 @@ productRouter.post(
 );
 
 productRouter.get("", authenticate, getAllProducts);
+
+productRouter.patch("/unlist/:id", authenticate, (req, res, next) => {
+  if (req.user.role !== "seller") {
+    return res.status(403).json({
+      message: "Unauthorized.",
+    });
+  }
+}, unlistProductValidator, unlistProduct);
+
+productRouter.patch("/list/:id", authenticate, (req, res, next) => {
+  if (req.user.role !== "seller") {
+    return res.status(403).json({
+      message: "Unauthorized.",
+    });
+  }
+}, listProductValidator, listProduct);
 
 export default productRouter;

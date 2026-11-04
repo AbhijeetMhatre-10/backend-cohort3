@@ -33,14 +33,14 @@ authRouter.post("/login", loginValidator, loginUser);
  *  @desc    Generate a new access token using a refresh token
  *  @access  Public
  */
-authRouter.post("/refresh-token", authenticate, refreshTokens);
+authRouter.post("/refresh-token", refreshTokens);
 
 /**
  *  @route   POST /api/auth/logout
  *  @desc    Log out the authenticated user and invalidate their session or tokens
  *  @access  Authenticated
  */
-authRouter.post("/logout", logoutUser);
+authRouter.post("/logout",authenticate, logoutUser);
 
 /**
  *  @route   GET /api/auth/register

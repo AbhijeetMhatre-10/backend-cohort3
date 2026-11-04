@@ -14,6 +14,14 @@ const authenticate = async (req, res, next) => {
 
     req.user = decode;
 
+    /**
+     * decode:{
+     *    * id: user._id,
+     *    * name: user.name,
+     *    * email: user.email,
+     * }
+     */
+
     next();
   } catch (error) {
     res.status(400).json({
